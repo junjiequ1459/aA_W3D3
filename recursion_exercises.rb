@@ -15,17 +15,6 @@ end
 # p it_range(1, 5)
 # p rec_range(1, 5)
 
-# this is math, not Ruby methods.
-
-# recursion 1
-# exp(b, 0) = 1
-# exp(b, n) = b * exp(b, n - 1)
-
-# # recursion 2
-# exp(b, 0) = 1
-# exp(b, 1) = b
-# exp(b, n) = exp(b, n / 2) ** 2             [for even n]
-# exp(b, n) = b * (exp(b, (n - 1) / 2) ** 2) [for odd n]
 
 def exponents_1(i, pow)
   return 1 if pow == 0
@@ -45,12 +34,47 @@ def exponents_2(i, pow)
   end
 end
 
-p exponents_1(4, 4)
-p exponents_2(4, 4)
-p exponents_2(2, 9)
+# p exponents_1(4, 4)
+# p exponents_2(4, 4)
+# p exponents_2(2, 9)
 
-#i = 2 ,pow = 9
-#2* exp2(2,4) = 16
-#2* exp2(2,2) = 8
-#2*exp2(2,1) = 4
-#2*exp2(2,0) = 2
+arr = [1,2,3]
+
+class Array
+
+    #want to return a new array, do not mutate existing array
+    #internal arrays should be new objects
+    #[1, [2], [3, [4]]]
+    # return self if self.none? { |ele| ele.is_a?(Array) }
+
+    #[1, [2], [3, [4]]]
+    #
+
+
+    def deep_dup
+
+        new_arr = []
+
+        self.each do |ele|
+            if ele.is_a?(Array)
+                new_arr << ele.deep_dup
+            else
+                new_arr << ele
+            end
+        end
+
+        new_arr
+    end
+end
+
+# p [1, [2], [3, [4]]].deep_dup
+
+# arr[1] = [2]
+
+# Step 1 outter shell [1, [2], [3, [4]]] , this contains arrays inside, iterate through these
+# step 2: identify if an element is an array, if it is, call deep_dup.
+
+
+
+# if sub_arr.is_a?(Array)
+#   sub_arr.each { |e| e.is_a?(Array) } [1,2,3,[4],5]
