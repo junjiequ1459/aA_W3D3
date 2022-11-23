@@ -114,18 +114,45 @@ def bsearch(arr, target)
   end
 end
 
-p bsearch([1, 2, 3], 1) # => 0
-p bsearch([2, 3, 4, 5], 3) # => 1
-p bsearch([2, 4, 6, 8, 10], 6) # => 2
-p bsearch([1, 3, 4, 5, 9], 5) # => 3
-p bsearch([1, 2, 3, 4, 5, 6], 6) # => 5
-p bsearch([1, 2, 3, 4, 5, 6], 0) # => nil
-p bsearch([1, 2, 3, 4, 5, 7], 6) # => nil
+# p bsearch([1, 2, 3], 1) # => 0
+# p bsearch([2, 3, 4, 5], 3) # => 1
+# p bsearch([2, 4, 6, 8, 10], 6) # => 2
+# p bsearch([1, 3, 4, 5, 9], 5) # => 3
+# p bsearch([1, 2, 3, 4, 5, 6], 6) # => 5
+# p bsearch([1, 2, 3, 4, 5, 6], 0) # => nil
+# p bsearch([1, 2, 3, 4, 5, 7], 6) # => nil
 
-# p bsearch([1, 2, 3, 4, 5, 6, 8], 6) # => 5
+def merge_sort(arr)
+    return if arr.length == 0
+    return arr if arr.length == 1
 
-# length = 6
-# midpoint = 4
+    midpoint = arr.length / 2
 
-# length = 7
-# midpoint
+    left = merge_sort(arr[0..midpoint-1])
+    p left
+    right = merge_sort(arr[midpoint..-1])
+    p right
+
+    merge(left,right)
+end
+
+def merge(arr1, arr2)
+    merged = []
+    max_length = (arr1.length + arr2.length)
+
+    while arr1.length > 0 && arr2.length > 0
+        if arr1[0] > arr2[0]
+            merged << arr2[0]
+            arr2.delete(arr2[0])
+        else
+            merged << arr1[0]
+            arr1.delete(arr1[0])
+        end
+    end
+
+    merged += arr1 + arr2
+
+end
+
+# p merge_sort([38,27,43,3,9,82,10])
+
